@@ -36,11 +36,19 @@ public:
 // (нужно обменивать именно сами указатели, переменные должны оставаться в тех же адресах памяти).
 
 template<typename T>
-void Swap(T* foo, T* bar)
+void Swap1(T* foo, T* bar)
 {
     T temp = *foo;
     *foo = *bar;
     *bar = temp;
+}
+
+template<typename T>
+void Swap2(T& foo, T& bar)
+{
+    T temp = foo;
+    foo = bar;
+    bar = temp;
 }
 
 // ================================ ДОМАШНЕЕ ЗАДАНИЕ № 2 ================================
@@ -155,11 +163,27 @@ int main()
     {
         std::cout << "  ========== Домашнее задание № 1 ========== " << std::endl << std::endl;
 
-        int a(1);
-        int b(9);
+        int a(100);
+        int b(999);
 
-        Swap(&a, &b);
+        int* ptrA = &a;
+        int* ptrB = &b;
 
+        // Возможно неверно понял задание, поэтому реализовал 2мя способами
+         
+        // Способ № 1
+        std::cout << a << ' ' << b << std::endl;
+        std::cout << ptrA << ' ' << ptrB << std::endl;
+        Swap1(&a, &b);
+        std::cout << ptrA << ' ' << ptrB << std::endl;
+        std::cout << a << ' ' << b << std::endl;
+
+        // Способ № 2
+        std::cout << "============================================" << std::endl;
+        std::cout << a << ' ' << b << std::endl;
+        std::cout << ptrA << ' ' << ptrB << std::endl;
+        Swap2(ptrA, ptrB);
+        std::cout << ptrA << ' ' << ptrB << std::endl;
         std::cout << a << ' ' << b << std::endl;
     }
 

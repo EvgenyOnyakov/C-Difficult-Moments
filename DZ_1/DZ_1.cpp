@@ -1,11 +1,10 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <optional>
 #include <vector>
 #include <tuple>
 #include <fstream>
 #include <sstream>
-
 #include <algorithm>
 #include <iomanip>
 

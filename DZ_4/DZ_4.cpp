@@ -71,9 +71,9 @@ void fill_vector(std::vector<T>& vec)
 	std::generate(vec.begin(), vec.end(), rand);
 }
 
-double countError(const std::vector<double>& input)
+double count_error(const std::vector<double>& input)
 {
-	double sum = std::accumulate(input.begin(), input.end(), 0.f, [](double currentSum, double const& value) {return currentSum + pow((value - (int)value), 2); });
+	double sum = std::accumulate(input.begin(), input.end(), 0.f, [](double current_sum, double const& value) {return current_sum + pow((value - (int)value), 2); });
 	return sum;
 }
 
@@ -126,7 +126,7 @@ int main()
 		std::cout << std::endl << std::endl << "Цифровой вектор:" << std::endl;
 		print(digital);
 
-		std::cout << std::endl << std::endl << "Ошибка: " << countError(analog);
+		std::cout << std::endl << std::endl << "Ошибка: " << count_error(analog);
 		std::cout << std::endl << std::endl;
 	}
 }

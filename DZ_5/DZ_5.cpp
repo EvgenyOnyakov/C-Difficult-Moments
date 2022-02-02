@@ -6,6 +6,8 @@
 #include <list>
 #include <map>
 #include <set>
+#include <unordered_set>
+#include <queue>
 
 // ================================ ДОМАШНЕЕ ЗАДАНИЕ № 1 ================================
 
@@ -31,10 +33,11 @@ void unique_words(T it_begin, T it_end)
 // которая будет считывать данные введенные пользователем из стандартного потока ввода и разбивать их на предложения.
 // Далее программа должна вывести пользователю все предложения, отсортировав их по длине.
 
-void sort_lines()
+// первый вариант
+void sort_lines_1()
 {
 	std::multimap<size_t, std::string, std::greater<size_t>> lines;	
-
+	std::cout << "  ========== первый вариант ========== " << std::endl << std::endl;
 	while (true)
 	{
 		std::string line;	
@@ -53,6 +56,61 @@ void sort_lines()
 	{ 
 			std::cout << v.first << ": " << v.second << std::endl; 
 	});
+}
+
+// второй вариант
+std::string get_sentence(std::string& s)
+{
+	std::string punctuation_marks{ ".?!" };                               
+	std::string temp;                                                     
+	for (const char& c : s)                                               
+	{
+		temp.push_back(c);                                                
+		if (punctuation_marks.find(c) != std::string::npos)                
+		{
+			s.erase(0, temp.size());                                      
+			if (temp[0] == ' ') { temp.erase(0, 1); }                     
+			return temp;                                                  
+		}
+	}
+	return {};                                                            
+}
+
+void sort_lines_2()
+{
+	std::unordered_set<std::string, std::hash<std::string>> sentences;
+	std::string current_string, temp_string; 
+	std::cout << std::endl << "  ========== второй вариант ========== " << std::endl << std::endl;
+	std::cout << "Введите текст: ";
+	std::getline(std::cin, current_string);
+	
+	if (!current_string.empty())                                       
+	{
+		temp_string += current_string + ' ';                            
+																		  
+		while (true)
+		{
+			std::string sentence(std::move(get_sentence(temp_string))); 
+			if (sentence.empty())
+			{
+				break;                                                
+			}
+			sentences.insert(std::move(sentence));                    
+		}
+	}	
+
+	std::cout << std::endl << "Отсортированный ввод: " << std::endl;
+
+	std::priority_queue<std::pair<size_t, std::string>> x;
+	for (const auto& sentence : sentences)
+	{
+		x.push({ sentence.size(), sentence });
+	}
+	while (!x.empty())
+	{
+		std::cout << x.top().first << ": " << x.top().second << '\n';
+		x.pop();
+	}
 }
 
 int main()
@@ -80,6 +138,10 @@ int main()
 	{
 		std::cout << std::endl << "  ========== Домашнее задание № 2 ========== " << std::endl << std::endl;
 
-		sort_lines();
+		// первый вариант
+		sort_lines_1();
+
+		// второй вариант
+		sort_lines_2();
 	}
 }

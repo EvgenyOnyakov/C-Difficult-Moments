@@ -108,7 +108,7 @@ void sort_lines_2()
 	}
 	while (!x.empty())
 	{
-		std::cout << x.top().first << ": " << x.top().second << '\n';
+		std::cout << x.top().first << ": " << x.top().second << std::endl;
 		x.pop();
 	}
 }

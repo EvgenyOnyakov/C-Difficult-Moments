@@ -232,6 +232,5 @@ int main()
             FOO.method_number_three(TEXT);
             FOO.method_number_four(TEXT);
             std::cout << std::endl;
-        }        
-    }
+        }
 }

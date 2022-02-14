@@ -1,0 +1,22 @@
+syntax="proto3";
+
+package students;
+
+message FullName
+{
+    string name = 1;
+    string surname = 2;
+    optional string patronymic = 3;
+}
+
+message Student 
+{
+	FullName name = 1;
+	repeated uint32 grades = 2;
+	uint32 avg_score = 3;
+}
+
+message StudentsGroup 
+{
+	repeated Student students = 1;
+}
